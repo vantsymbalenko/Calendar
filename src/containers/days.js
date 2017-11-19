@@ -61,41 +61,62 @@ export default class days extends Component{
        }
     }
     render(){
-        let monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-        let days = new Date( this.state.year, this.state.month, 0).getDate();
+        // let monthNames = ["January", "February", "March", "April", "May", "June",
+        //     "July", "August", "September", "October", "November", "December"
+        // ];
+        // let days = new Date( this.state.year, this.state.month, 0).getDate();
         console.log(this.state);
         console.log(this.state.task);
      return(
          <div>
-             <button onClick={this.showNextMonth}>next month</button>
-             <button onClick={this.showPreviousMonth}>previous month </button>
-             <p>{monthNames[this.state.month - 1]}</p>
-             <br/>
-             {
-                 [...Array(days)].map((x,i) => {
-                     return(
-                             <div
-                                 className={'day' +( (this.state.year + "" + this.state.month + "" + (i+1)) === (this.state.nowYear + "" + (this.state.nowMonth+1) + "" + (this.state.nowDay-1)) ? ' nowDay' : '' ) }
-                                 key = {this.state.year + ' ' + this.state.month + ' ' + i}
-                                 onClick = {this.addTask}
-                             >
-                                 {i+1}
-                                 <p>{this.state.task[(i+1) + "" + this.state.year + this.state.month]}</p>
+             <div className="container">
+                 <div className="calendar">
+                     <div className="header"></div>
+                     <div className="week-days"></div>
+                     <div className="add-task"></div>
+                 </div>
+                 <div className="today-tasks">
+                     <div className="today-tasks-layer"></div>
+                     <div className="date">
+                         <div className="now-day">02</div>
+                         <div className="wrapper">
+                             <div className="now-month">June</div>
+                             <div className="now-week-day">Monday</div>
+                         </div>
+                     </div>
+                     <div className="tasks">
+                         <div className="task">
+                             <div className="mark"></div>
+                             <div className="task-wrapper">
+                                 <div className="time">17:00</div>
+                                 <div className="task-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, aliquid debitis dolores, eligendi esse exercitationem hic impedit ipsam nam numquam perferendis quam, quas sapiente. Dolore maxime nemo porro quasi sapiente!</div>
                              </div>
-                     );
-                 })
-             }
-             <br/>
-             <textarea name="name" id="" cols="30" rows="10"
-                       defaultValue=" "
-                ref = {(input) => {
-                    this.taskMessage = input;
-                }}
-             ></textarea>
-             <button onClick = { this.addToList}>Add</button>
+                         </div>
+                         <div className="task">
+                             <div className="mark"></div>
+                             <div className="task-wrapper">
+                                 <div className="time">17:00</div>
+                                 <div className="task-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, aliquid debitis dolores, eligendi esse exercitationem hic impedit ipsam nam numquam perferendis quam, quas sapiente. Dolore maxime nemo porro quasi sapiente!</div>
+                             </div>
+                         </div>
+                         <div className="task">
+                             <div className="mark"></div>
+                             <div className="task-wrapper">
+                                 <div className="time">17:00</div>
+                                 <div className="task-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, aliquid debitis dolores, eligendi esse exercitationem hic impedit ipsam nam numquam perferendis quam, quas sapiente. Dolore maxime nemo porro quasi sapiente!</div>
+                             </div>
+                         </div>
+                         <div className="task">
+                             <div className="mark"></div>
+                             <div className="task-wrapper">
+                                 <div className="time">17:00</div>
+                                 <div className="task-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, aliquid debitis dolores, eligendi esse exercitationem hic impedit ipsam nam numquam perferendis quam, quas sapiente. Dolore maxime nemo porro quasi sapiente!</div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
              </div>
+         </div>
         );
     }
 }
