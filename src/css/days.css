@@ -1,98 +1,164 @@
-/*!*.day{*!*/
-    /*!*float:left;*!*/
-    /*!*width:100px;*!*/
-    /*!*height: 100px;*!*/
-    /*!*border: 2px solid black;*!*/
-    /*!*!*border-radius: 10px;*!*!*/
-/*!*}*!*/
-/*!*.nowDay{*!*/
-    /*!*background-color : blue;*!*/
-/*!*}*!*/
-/*.container{*/
-    /*!*border:1px solid black;*!*/
-    /*width: 60vw;*/
-    /*min-height: 80vh;*/
-    /*margin:0 auto;*/
-    /*position: relative;*/
-/*}*/
-/*.today-tasks, .calendar{*/
-    /*display: inline-block;*/
-    /*border: 1px solid black;*/
-
-
-/*}*/
-/*.today-tasks{*/
-    /*min-height: 80vh;*/
-    /*position: relative;*/
-    /*width: 40%;*/
-    /*border-radius: 20px;*/
-    /*!*background-color: deepskyblue;*!*/
-    /*background-image: url("../image/background-task.jpg");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: cover;*/
-    /*z-index: 1000;*/
-/*}*/
-/*.calendar{*/
-    /*min-height: 75vh;*/
-    /*width: 59%;*/
-    /*border-top-right-radius: 20px;*/
-    /*border-bottom-right-radius: 20px;*/
-    /*box-shadow: 0 10px 30px -4px #685cae;*/
-    /*!*background-color: blue;*!*/
-    /*z-index: 0;*/
-    /*margin: 2% -3%;*/
-/*}*/
-/*.today-tasks-layer{*/
-    /*width:100%;*/
-    /*min-height: 80vh;*/
-    /*position: absolute;*/
-    /*opacity: 0.6;*/
-    /*background-color: darkslateblue;*/
-    /*border-radius: 20px;*/
-
-    /*!*border: 1px solid black;*!*/
-/*}*/
-
-/*@media screen and (max-height:568px) and (max-width: 320px ) {*/
-    /*.container{*/
-        /*min-height: 100vmin;*/
-    /*}*/
-    /*.today-tasks, .calendar{*/
-        /*display: block;*/
-        /*margin:0;*/
-    /*}*/
-/*}*/
 .container{
-    border:1px solid black;
-    width: 60vw;
+    /*border:1px solid black;*/
+    width: 72vw;
     margin: 0 auto;
-    height: 80vh;
-    min-height:450px;
+    height: auto;
+    min-height:500px;
 
 }
 .today-tasks, .calendar{
-    border: 1px solid black;
-    display: inline-block;
+    /*border: 1px solid black;*/
+    float:left;
+    /*display: inline-block;*/
 }
+
+/*styles for calendar*/
 .calendar{
-    width:59%;
-    height: 75vh;
-    min-height:400px;
+    width:55%;
+    height: auto;
+    min-height:450px;
+    position: relative;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     box-shadow: 0 10px 30px -4px #685cae;
     margin: 2.5vh 0;
     z-index: 0;
 }
+p {
+     display: block;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+}
+.header{
+    font-size:3rem;
+    color: rgb(72, 61, 139);
+    width:100%;
+    height:4rem;
+    /*border:1px solid violet;*/
+    margin-top: 20px;
+}
+.active-month{
+    width:100%;
+}
+/* arrows next prev*/
+.left-arrow{
+    text-align: left;
+    padding-left: 10px;
+}
+.right-arrow{
+    text-align: right;
+    padding-right: 10px;
+}
+.left-arrow, .calendar-month, .right-arrow{
+    display: inline-block;
+    color: rgb(72, 61, 139);
+    cursor: pointer;
+    width:30%;
+    transition: .2s;
+    /*border:1px solid violet;*/
+}
+.calendar-month{
+    text-align: center;
+    font-size:1.6rem;
+}
+.left-arrow:hover, .right-arrow:hover{
+    color: rgb(111, 101, 198);
+    font-size:3.1rem;
+}
+
+.week-days-wrapper{
+    width:100%;
+    text-align: center;
+    margin-top: 20px;
+    /*border:1px solid violet;*/
+
+}
+.week-day{
+    /*border:1px solid violet;*/
+    /*color:rgb(131, 120, 226);*/
+    width:14%;
+    color:rgb(72, 61, 139);
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight:600;
+    display: inline-block;
+    /*margin:0 4%;*/
+    font-size:0.8em;
+}
+.wrapper-month-day{
+    display: inline-block;
+    width:14%;
+    height:1.7rem;
+    margin-top:20px;
+    font-size:1.3rem;
+    text-align: center;
+    /*border:1px solid black;*/
+    /*border-radius:50%;*/
+}
+.month-day{
+    /*border:1px double rgb(131, 120, 226);*/
+    /*width:1.6rem;*/
+    /*height:1.6rem;*/
+    /*font-weight: 500;*/
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    /*color:rgb(93, 83, 178);*/
+    /*border-radius: 50%;*/
+}
+.prev-month-day{
+    /*font-weight: 600;*/
+    color:rgb(194, 190, 224);
+    font-family: 'Open Sans', sans-serif;
+}
+
+.add-task{
+    border: 2px double white;
+    display: block;
+    color:white;
+    background-color: rgb(72, 61, 139);
+    width:9vmin;
+    height: 9vmin;
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
+    margin: 10px auto;
+    font-size: 7vmin;
+    transition: .3s;
+}
+.add-task i{
+    font-style: normal;
+    /*font-weight:800;*/
+    /*display: block;*/
+    margin: auto;
+}
+.add-task:hover{
+    border-color : rgb(72, 61, 139) ;
+    color : rgb(72, 61, 139);
+    background-color: white;
+    /*font-size: 7.5vmin;*/
+}
+.bonus{
+    width:2rem;
+    height:2rem;
+    border-radius: 50%;
+    /*border:  double white;*/
+    color:white;
+    background-color: rgb(72, 61, 139);
+    text-align: center;
+    /*padding:-20px;*/
+    margin: auto;
+}
+
+/* styles for tasks which will visible for active date*/
 .today-tasks{
     overflow-y: scroll;
     z-index: 1000;
     width: 40%;
-    height:80vh;
-    min-height:430px;
+    height:70vh;
+    min-height:470px;
     margin: 0;
     position: relative;
-    background-image: url("../image/background-task.jpg");
+    background-image: url("../image/bg2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 10px;
@@ -101,7 +167,6 @@
     width: 0;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
 }
-/* optional: show position indicator in red */
 
 .today-tasks-layer{
     width:100%;
@@ -111,6 +176,8 @@
     background-color: rgba(72, 61, 139, 0.6);
 
 }
+
+
 /* style for active date on today-task element*/
 .date{
     position: absolute;
@@ -182,12 +249,16 @@
 
 @media screen and (max-width: 768px){
     .container{
-        width:100vw;
+        width:98vw;
+    }
+    .week-day{
+        /*margin:2%;*/
+        font-size:0.7em;
     }
 }
 @media screen and (max-width: 480px){
     .container{
-        width: 80vw;
+        /*width: 95vw;*/
     }
     .today-tasks, .calendar{
         display:block;
