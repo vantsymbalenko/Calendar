@@ -1,0 +1,96 @@
+.today-tasks{
+    overflow-y: scroll;
+    z-index: 1000;
+    width: 40%;
+    height:70vh;
+    min-height:470px;
+    margin: 0;
+    position: relative;
+    background-image: url("../image/bg2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+.today-tasks::-webkit-scrollbar {
+    width: 0;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+.today-tasks-layer{
+    width:100%;
+    height:80vh;
+    min-height: 430px;
+    position: absolute;
+    background-color: rgba(72, 61, 139, 0.6);
+
+}
+
+
+/* style for active date on today-task element*/
+.date{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right:0;
+    left:0;
+    width: 200px;
+    height: 100px;
+    margin: 50px auto;
+    /*border: 1px solid black;*/
+
+}
+.now-day, .wrapper{
+    display: inline-block;
+    /*border: 1px solid black;*/
+}
+
+.now-day, .now-month, .now-week-day{
+    color: white;
+}
+.now-month, .now-week-day{
+    font-size:1.5rem;
+}
+.now-day{
+    margin-right: 10px;
+    font-size: 5rem;
+}
+
+.tasks{
+    position: absolute;
+    /*border: 1px solid black;*/
+    width: 100%;
+    /*height:100%;*/
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    margin:150px auto;
+}
+.task{
+    margin-bottom: 25px;
+}
+.mark, .task-wrapper{
+    display: inline-block;
+}
+.task-wrapper{
+    width:80%;
+}
+.mark{
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: red;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: auto;
+}
+.time{
+    margin-bottom: 5px;
+    color:darkgrey;
+    font-size:16px;
+}
+.task{
+    color: white;
+    font-size:18px;
+}

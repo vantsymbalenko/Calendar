@@ -1,0 +1,36 @@
+.date{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right:0;
+    left:0;
+    width: 200px;
+    height: 100px;
+    margin: 50px auto;
+    /*border: 1px solid black;*/
+
+}
+.now-day, .wrapper{
+    display: inline-block;
+    /*border: 1px solid black;*/
+}
+
+.now-day, .now-month, .now-week-day{
+    color: white;
+}
+.now-month, .now-week-day{
+    font-size:1.4rem;
+}
+.now-day{
+    margin-right: 10px;
+    font-size: 5rem;
+}
+
+@media screen and (max-width: 768px){
+    .now-month, .now-week-day{
+        font-size:1.1rem;
+    }
+    .now-day{
+        font-size:4.5rem;
+    }
+}

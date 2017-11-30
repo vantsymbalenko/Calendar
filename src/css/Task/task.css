@@ -1,0 +1,40 @@
+.tasks{
+    position: absolute;
+    /*border: 1px solid black;*/
+    width: 100%;
+    /*height:100%;*/
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    margin:150px auto;
+}
+.task{
+    margin-bottom: 25px;
+}
+.mark, .task-wrapper{
+    display: inline-block;
+}
+.task-wrapper{
+    width:80%;
+}
+.mark{
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: red;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: auto;
+}
+.time{
+    margin-bottom: 5px;
+    color:darkgrey;
+    font-size:16px;
+}
+.task{
+    color: white;
+    font-size:18px;
+}
+

@@ -1,17 +1,42 @@
 import React, { Component } from 'react';
+// import Calendar from "../components/Calendar";
+// import Tasks from '../components/Tasks';
+import HeaderCalendar from '../components/Calendar/HeaderCalendar';
+import MonthDays from '../components/Calendar/MonthDays';
+import WeekDays from '../components/Calendar/WeekDays';
+import SelectedDate from '../components/Task/SelectedDate';
+import Tasks from '../components/Task/Tasks';
+import AddTask from '../components/Task/AddTask';
+
 import '../css/days.css';
+
 export default class days extends Component{
     constructor(props){
         super(props);
         this.state = {
             year : new Date().getFullYear(),
             month : new Date().getMonth(),
+            todayMonth : new Date().getMonth(),
             dayOfTheMonth : new Date().getDate(),
-            select : new Date().getDate()
+            select : new Date().getDate(),
+            add : true,
+            tasks : {
+                "20171023" : [
+                    {
+                        time : '17:00',
+                        message : 'message for first task'
+                    },
+                    {
+                        time : '18:00',
+                        message : 'message for second task'
+                    }
+                ]
+            }
         };
         this.showPrevMonth = this.showPrevMonth.bind(this);
         this.showNextMonth = this.showNextMonth.bind(this);
-        this.selectedDate = this.selectedDate.bind(this)
+        this.selectedDate = this.selectedDate.bind(this);
+        this.addTask = this.addTask.bind(this);
     }
     showPrevMonth(){
         if(this.state.month === 0){
@@ -45,110 +70,88 @@ export default class days extends Component{
             });
         }
     }
+    addTask(e){
+        e.preventDefault();
+        this.setState({
+            add : true
+        });
+
+    }
     render(){
         // let monthNames = ["January", "February", "March", "April", "May", "June",
         //     "July", "August", "September", "October", "November", "December"
         // ];
-        let WeekDays = [ "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        // console.log(this.state);
+        let nameWeekDays = [ "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        let fullNameWeekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         let monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
         // let days = new Date( this.state.year, this.state.month, 0).getDate();
-        console.log(this.state);
-        console.log(this.state.task);
+        // console.log(this.state);
+        // console.log(this.state.task);
         let numberOfDays = new Date(this.state.year, this.state.month+1, 0).getDate();
         let firstDayInWeek = new Date(this.state.year, this.state.month, 1).getDay();
         let numberOfDaysPrevMonth = new Date(this.state.year, this.state.month, 0).getDate();
         let daysBefore = numberOfDaysPrevMonth - firstDayInWeek + 1;
-        console.log(daysBefore);
-        let arr = [];
+        let activeDayInWeek = new Date( this.state.year, this.state.month, this.state.select).getDay();
+        let days = [];
         for(let i=daysBefore; i<=numberOfDaysPrevMonth; i++){
-            arr.push(i);
+            days.push(i);
         }
         for(let i=1; i<=numberOfDays;i++){
-            arr.push(i);
+            days.push(i);
         }
      return(
-         <div>
              <div className="container">
                  <div className="calendar">
-                     <div className="header">
-                         <div className="active-month">
-                             <p className="left-arrow" onClick = {this.showPrevMonth}>&#x2039;</p>
-                             <div className="calendar-month">
-                                 <p>{this.state.year}</p>
-                                 <p>{monthNames[this.state.month]}</p>
-                             </div>
-                             <p className="right-arrow" onClick = {this.showNextMonth}>&#x203A;</p>
-                         </div>
-                     </div>
-                     <div className="week-days-wrapper">
-                         {WeekDays.map((value, i ) => {
-                             return(
-                                <div key = {i} className="week-day">{value}</div>
-                             );
-                         })}
-                     </div>
-                     <div className="month-days">
-                         {arr.map((value, i) => {
-                             return (
-                                 <div className="wrapper-month-day">
-                                     <div
-                                         key = {i}
-                                         className={((i<6 && value>23) ? "prev-month-day" : "month-day") + (this.state.select === value && i>firstDayInWeek-1 ? " bonus" : "") }
-                                         onClick={this.selectedDate}
-                                     >
-                                         {value}
-                                     </div>
-                                 </div>
-
-                             )
-                         })}
-                     </div>
-                     <button className="add-task"><i>&#43;</i></button>
+                     <HeaderCalendar
+                         showPrevMonth = { this.showPrevMonth }
+                         showNextMonth = { this.showNextMonth }
+                         monthNames = { monthNames }
+                         month = { this.state.month }
+                         year = { this.state.year }
+                     />
+                     <WeekDays weekDays = { nameWeekDays } />
+                     <MonthDays
+                         days = { days }
+                         select = { this.state.select }
+                         firstDayInWeek = { firstDayInWeek }
+                         selectedDate = { this.selectedDate }
+                         dayOfTheMonth= { this.state.dayOfTheMonth }
+                         todayMonth = { this.state.todayMonth }
+                         month = { this.state.month }
+                     />
+                     <button className="add-task" onClick={ this.addTask }><i>&#43;</i></button>
                  </div>
+                 {/*<Calendar*/}
+                     {/*showPrevMonth = { this.showPrevMonth }*/}
+                     {/*showNextMonth = { this.showNextMonth }*/}
+                     {/*year = { this.state.year }*/}
+                     {/*monthNames = { monthNames }*/}
+                     {/*month = { this.state.month }*/}
+                     {/*weekDays = { WeekDays }*/}
+                     {/*days = { days }*/}
+                     {/*select = { this.state.select }*/}
+                     {/*firstDayInWeek = { firstDayInWeek }*/}
+                     {/*selectedDate = { this.selectedDate }*/}
+                 {/*/>*/}
                  <div className="today-tasks">
                      <div className="today-tasks-layer"></div>
-                     <div className="date">
-                         <div className="now-day">02</div>
-                         <div className="wrapper">
-                             <div className="now-month">June</div>
-                             <div className="now-week-day">Monday</div>
-                         </div>
-                     </div>
-                     <div className="tasks">
-                         <div className="task">
-                             <div className="mark"></div>
-                             <div className="task-wrapper">
-                                 <div className="time">17:00</div>
-                                 <div className="task-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, aliquid debitis dolores, eligendi esse exercitationem hic impedit ipsam nam numquam perferendis quam, quas sapiente. Dolore maxime nemo porro quasi sapiente!</div>
-                             </div>
-                         </div>
-                         {/*<div className="task">*/}
-                             {/*<div className="mark"></div>*/}
-                             {/*<div className="task-wrapper">*/}
-                                 {/*<div className="time">17:00</div>*/}
-                                 {/*<div className="task-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, aliquid debitis dolores, eligendi esse exercitationem hic impedit ipsam nam numquam perferendis quam, quas sapiente. Dolore maxime nemo porro quasi sapiente!</div>*/}
-                             {/*</div>*/}
-                         {/*</div>*/}
-                         {/*<div className="task">*/}
-                             {/*<div className="mark"></div>*/}
-                             {/*<div className="task-wrapper">*/}
-                                 {/*<div className="time">17:00</div>*/}
-                                 {/*<div className="task-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, aliquid debitis dolores, eligendi esse exercitationem hic impedit ipsam nam numquam perferendis quam, quas sapiente. Dolore maxime nemo porro quasi sapiente!</div>*/}
-                             {/*</div>*/}
-                         {/*</div>*/}
-                         <div className="task">
-                             <div className="mark"></div>
-                             <div className="task-wrapper">
-                                 <div className="time">17:00</div>
-                                 <div className="task-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, aliquid debitis dolores, eligendi esse exercitationem hic impedit ipsam nam numquam perferendis quam, quas sapiente. Dolore maxime nemo porro quasi sapiente!</div>
-                             </div>
-                         </div>
-                     </div>
+                     <SelectedDate
+                         select = { this.state.select }
+                         monthNames = { monthNames }
+                         selectMonth = { this.state.month }
+                         fullNameWeekDays = { fullNameWeekDays }
+                         activeDayInWeek = { activeDayInWeek }
+                     />
+                     {this.state.add ?
+                           <AddTask/>
+                         : <Tasks tasks={this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]}/>
+                     }
                  </div>
+                {/*<Tasks/>*/}
              </div>
-         </div>
         );
     }
 }

@@ -1,0 +1,44 @@
+.wrapper-month-day{
+    display: inline-block;
+    width:14%;
+    height:1.7rem;
+    margin-top:20px;
+    font-size:1.3rem;
+    text-align: center;
+    /*border:1px solid black;*/
+    /*border-radius:50%;*/
+}
+.month-day{
+    /*border:1px double rgb(131, 120, 226);*/
+    /*width:1.6rem;*/
+    /*height:1.6rem;*/
+    /*font-weight: 500;*/
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    /*color:rgb(93, 83, 178);*/
+    /*border-radius: 50%;*/
+}
+.prev-month-day{
+    /*font-weight: 600;*/
+    color:rgb(194, 190, 224);
+    font-family: 'Open Sans', sans-serif;
+}
+.bonus{
+    width:2rem;
+    height:2rem;
+    border-radius: 50%;
+    /*border:  double white;*/
+    color:white;
+    background-color: rgb(72, 61, 139);
+    text-align: center;
+    /*padding:-20px;*/
+    margin: auto;
+}
+.active{
+    width:2rem;
+    height:2rem;
+    border-radius: 50%;
+    border:2px dashed rgb(72, 61, 139);
+    margin: auto;
+
+}
