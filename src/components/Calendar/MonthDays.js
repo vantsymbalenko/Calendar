@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../css/Calendar/month-day.css';
 export default class MonthDays extends Component{
     render(){
+        console.log(this.props.firstDayInWeek);
         return(
             <div className="month-days">
                 {this.props.days.map((value, i) => {
@@ -9,7 +10,7 @@ export default class MonthDays extends Component{
                     let bonusClass = ( this.props.select === value && i > this.props.firstDayInWeek - 1 ) ? " bonus" : "";
                     let todayClass = (  (this.props.dayOfTheMonth === value )
                                         && (this.props.month === this.props.todayMonth)
-                                        && ((+value-i) === -2)  )
+                                        && ((+value-i) === -(this.props.firstDayInWeek-1))  )
                                         ? " active" : "";
                     return (
                         <div className="wrapper-month-day" key = { i } >
