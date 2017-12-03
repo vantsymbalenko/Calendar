@@ -37,6 +37,7 @@ export default class days extends Component{
         this.showNextMonth = this.showNextMonth.bind(this);
         this.selectedDate = this.selectedDate.bind(this);
         this.addTask = this.addTask.bind(this);
+        // this.add = this.add.bind(this);
     }
     showPrevMonth(){
         if(this.state.month === 0){
@@ -75,6 +76,9 @@ export default class days extends Component{
         this.setState({
             add : true
         });
+
+    }
+    add(timeFrom, timeTo, message){
 
     }
     render(){
@@ -146,7 +150,7 @@ export default class days extends Component{
                          activeDayInWeek = { activeDayInWeek }
                      />
                      {this.state.add ?
-                           <AddTask/>
+                           <AddTask add = { this.add }/>
                          : <Tasks tasks={this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]}/>
                      }
                  </div>
