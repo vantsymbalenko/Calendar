@@ -6,7 +6,7 @@ export default class Task extends Component{
             <div className="task">
                 <div className="mark"></div>
                 <div className="task-wrapper">
-                    <div className="time">{this.props.elem.time}</div>
+                    <div className="time">{this.props.elem.timeFrom + '-' +this.props.elem.timeTo }</div>
                     <div className="task-message">{ this.props.elem.message}</div>
                 </div>
             </div>

@@ -19,16 +19,26 @@ export default class days extends Component{
             todayMonth : new Date().getMonth(),
             dayOfTheMonth : new Date().getDate(),
             select : new Date().getDate(),
-            add : true,
+            add : false,
+            errors : '',
             tasks : {
                 "20171023" : [
                     {
-                        time : '17:00',
+                        timeFrom : '17:00',
+                        timeTo : '18:00',
                         message : 'message for first task'
                     },
                     {
-                        time : '18:00',
+                        timeFrom : '18:00',
+                        timeTo : '19:00',
                         message : 'message for second task'
+                    }
+                ],
+                "2017113" : [
+                    {
+                        timeFrom : '17:00',
+                        timeTo : '18:00',
+                        message : 'message for first task'
                     }
                 ]
             }
@@ -37,7 +47,8 @@ export default class days extends Component{
         this.showNextMonth = this.showNextMonth.bind(this);
         this.selectedDate = this.selectedDate.bind(this);
         this.addTask = this.addTask.bind(this);
-        // this.add = this.add.bind(this);
+        this.add = this.add.bind(this);
+        this.cancel = this.cancel.bind(this);
     }
     showPrevMonth(){
         if(this.state.month === 0){
@@ -79,7 +90,77 @@ export default class days extends Component{
 
     }
     add(timeFrom, timeTo, message){
+        let key = this.state.year + '' + this.state.month + '' + this.state.select;
+        if(this.state.tasks[key]){
+            let timeFromHours = +timeFrom.split(":")[0],
+                timeFromMinute = +timeFrom.split(":")[1],
+                timeToHours = +timeTo.split(":")[0],
+                timeToMinute = +timeTo.split(":")[1];
+            let timeFirstStart = new Date(0,0,0, timeFromHours, timeFromMinute);
+            let timeFirstEnd = new Date(0,0,0, timeToHours, timeToMinute);
+            // console.log(timeFromHours);
+            // console.log(timeFromMinute);
+            // console.log(this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]);
+            this.setState({
+                errors : ''
+            });
+            if(timeFirstEnd <= timeFirstStart){
+                this.setState({
+                    errors : 'Time To must be bigger than Time From'
+                });
+            }else{
+                for(let i=0; i < this.state.tasks[key].length; i++){
+                    let element = this.state.tasks[key][i];
+                    let timeFromHours = +element.timeFrom.split(":")[0],
+                        timeFromMinute = +element.timeFrom.split(":")[1],
+                        timeToHours = +element.timeTo.split(":")[0],
+                        timeToMinute = +element.timeTo.split(":")[1];
+                    let timeSecondStart = new Date(0,0,0, timeFromHours, timeFromMinute);
+                    let timeSecondEnd = new Date(0,0,0, timeToHours, timeToMinute);
+                    if( (timeSecondStart>timeFirstStart && timeSecondStart<timeFirstEnd) ||
+                        (timeSecondEnd>timeFirstStart && timeSecondEnd<timeFirstEnd) ||
+                        (timeFirstStart > timeSecondStart && timeFirstStart < timeSecondEnd) ){
+                        console.log("alert");
+                        this.setState({
+                            errors : 'You already have task in this time'
+                        });
+                        break;
+                    }
+                }
+                if(this.state.errors === ''){
+                    let tasks = this.state.tasks;
+                    tasks[key].push({
+                        timeFrom : timeFrom,
+                        timeTo : timeTo,
+                        message : message
+                    });
+                    this.setState({
+                        tasks : tasks,
+                        add : false
+                    });
+                }
+            }
 
+        }else{
+            let tasks = this.state.tasks;
+            tasks[key] = [{
+                timeFrom : timeFrom,
+                timeTo : timeTo,
+                message : message
+            }];
+            this.setState({
+                tasks :tasks,
+                add : false
+            });
+        }
+
+
+    }
+    cancel(e){
+        e.preventDefault();
+        this.setState({
+            add : false
+        });
     }
     render(){
         // let monthNames = ["January", "February", "March", "April", "May", "June",
@@ -106,6 +187,7 @@ export default class days extends Component{
         for(let i=1; i<=numberOfDays;i++){
             days.push(i);
         }
+        // console.log(this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]);
      return(
              <div className="container">
                  <div className="calendar">
@@ -150,7 +232,11 @@ export default class days extends Component{
                          activeDayInWeek = { activeDayInWeek }
                      />
                      {this.state.add ?
-                           <AddTask add = { this.add }/>
+                           <AddTask
+                               add = { this.add }
+                               cancel = {this.cancel }
+                               errors = {this.state.errors}
+                           />
                          : <Tasks tasks={this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]}/>
                      }
                  </div>

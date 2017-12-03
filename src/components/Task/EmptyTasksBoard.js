@@ -6,7 +6,7 @@ export default class EmptyTasksBoard extends Component{
         return(
             <div className="no-tasks">
                 <div className="mark"></div>
-                <div className="message">You have not tasks for today</div>
+                <div className="message">You have not tasks for this day</div>
             </div>
         );
     }

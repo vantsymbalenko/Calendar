@@ -36,7 +36,12 @@ export default class AddTask extends Component{
                                ref = {(input) => { this.message = input;}}
                            ></textarea>
                        </label>
-                       <input type="submit" value="Cancel" className="event-button"/>
+                       <input
+                           type="button"
+                           value="Cancel"
+                           className="event-button"
+                           onClick = { this.props.cancel }
+                       />
                        <input
                            type="submit"
                            value="Add"
@@ -44,7 +49,7 @@ export default class AddTask extends Component{
                            onClick = { this.wrapperAdd }
                        />
                    </form>
-                   {this.props.erros}
+                   {this.props.errors}
                </div>
         )
     }
