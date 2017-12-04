@@ -11,7 +11,67 @@
 }
 .task{
     margin-bottom: 25px;
+    color: white;
+    font-size:18px;
 }
+.task:hover{
+    border:1px solid white;
+}
+
+.delete{
+    margin: auto;
+    width:24px;
+    /*border: 2px double white;*/
+    padding: 5px 0;
+    border-radius: 50%;
+    background-color:rgb(51, 78, 97);
+    cursor: pointer;
+    transition: .3s;
+
+}
+.cross{
+    height:14px;
+    text-align:center;
+    font-size: 30px;
+    font-weight: 700;
+    line-height:14px;
+    color:white;
+    transform: rotate(45deg);
+}
+.delete:hover{
+    background-color:white;
+}
+.delete:hover .cross{
+    color:rgb(51, 78, 97);
+}
+.time{
+    margin-bottom: 5px;
+    color:darkgrey;
+    font-size:16px;
+}
+.time, .edit, .delete {
+    position: absolute;
+    margin-top:5px;
+}
+.delete{
+    border: none;
+    right: 10px;
+}
+.edit{
+    /*background-image: url(../../image/edit_icon.png);*/
+    /*!*background-size: 24px 24px;*!*/
+    /*background-position: top;*/
+    /*background: url("../../image/edit_icon.png");*/
+    right:50px;
+    cursor: pointer;
+}
+.delete, .edit{
+    display: none;
+}
+.task:hover .delete, .task:hover .edit{
+    display: inline;
+}
+
 .mark, .task-wrapper{
     display: inline-block;
 }
@@ -28,13 +88,8 @@
     margin-left: 20px;
     margin-bottom: auto;
 }
-.time{
-    margin-bottom: 5px;
-    color:darkgrey;
-    font-size:16px;
+.task-message{
+    margin-top:30px;
 }
-.task{
-    color: white;
-    font-size:18px;
-}
+
 

@@ -49,6 +49,7 @@ export default class days extends Component{
         this.addTask = this.addTask.bind(this);
         this.add = this.add.bind(this);
         this.cancel = this.cancel.bind(this);
+        this.remove = this.remove.bind(this);
     }
     showPrevMonth(){
         if(this.state.month === 0){
@@ -91,23 +92,19 @@ export default class days extends Component{
     }
     add(timeFrom, timeTo, message){
         let key = this.state.year + '' + this.state.month + '' + this.state.select;
+        let timeFromHours = +timeFrom.split(":")[0],
+            timeFromMinute = +timeFrom.split(":")[1],
+            timeToHours = +timeTo.split(":")[0],
+            timeToMinute = +timeTo.split(":")[1];
+        let timeFirstStart = new Date(0,0,0, timeFromHours, timeFromMinute);
+        let timeFirstEnd = new Date(0,0,0, timeToHours, timeToMinute);
+        let counter = 0;
         if(this.state.tasks[key]){
-            let timeFromHours = +timeFrom.split(":")[0],
-                timeFromMinute = +timeFrom.split(":")[1],
-                timeToHours = +timeTo.split(":")[0],
-                timeToMinute = +timeTo.split(":")[1];
-            let timeFirstStart = new Date(0,0,0, timeFromHours, timeFromMinute);
-            let timeFirstEnd = new Date(0,0,0, timeToHours, timeToMinute);
-            // console.log(timeFromHours);
-            // console.log(timeFromMinute);
-            // console.log(this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]);
-            this.setState({
-                errors : ''
-            });
             if(timeFirstEnd <= timeFirstStart){
                 this.setState({
                     errors : 'Time To must be bigger than Time From'
                 });
+                console.log(this.state.errors);
             }else{
                 for(let i=0; i < this.state.tasks[key].length; i++){
                     let element = this.state.tasks[key][i];
@@ -121,13 +118,16 @@ export default class days extends Component{
                         (timeSecondEnd>timeFirstStart && timeSecondEnd<timeFirstEnd) ||
                         (timeFirstStart > timeSecondStart && timeFirstStart < timeSecondEnd) ){
                         console.log("alert");
+                        counter++;
                         this.setState({
                             errors : 'You already have task in this time'
                         });
-                        break;
+                        console.log(counter);
+                        // break;
                     }
                 }
-                if(this.state.errors === ''){
+                if(counter === 0  ){
+                    console.log('errors ' +((this.state.errors ==='')? 'empty':this.state.errors) );
                     let tasks = this.state.tasks;
                     tasks[key].push({
                         timeFrom : timeFrom,
@@ -136,11 +136,16 @@ export default class days extends Component{
                     });
                     this.setState({
                         tasks : tasks,
-                        add : false
+                        add : false,
+                        errors : ''
                     });
                 }
             }
 
+        }else if(timeFirstEnd <= timeFirstStart) {
+            this.setState({
+                errors : 'Time From must be bigger than Time To'
+            });
         }else{
             let tasks = this.state.tasks;
             tasks[key] = [{
@@ -150,7 +155,8 @@ export default class days extends Component{
             }];
             this.setState({
                 tasks :tasks,
-                add : false
+                add : false,
+                errors : ''
             });
         }
 
@@ -159,7 +165,18 @@ export default class days extends Component{
     cancel(e){
         e.preventDefault();
         this.setState({
-            add : false
+            add : false,
+            errors : ''
+        });
+    }
+    remove(index){
+        let key = this.state.year + '' + this.state.month + '' + this.state.select;
+        let tasks = this.state.tasks;
+        tasks[key].splice(index,1);
+        console.log(index);
+        console.log(tasks);
+        this.setState({
+            tasks : tasks
         });
     }
     render(){
@@ -237,7 +254,9 @@ export default class days extends Component{
                                cancel = {this.cancel }
                                errors = {this.state.errors}
                            />
-                         : <Tasks tasks={this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]}/>
+                         : <Tasks tasks={this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]}
+                                  remove = {this.remove}
+                         />
                      }
                  </div>
                 {/*<Tasks/>*/}
