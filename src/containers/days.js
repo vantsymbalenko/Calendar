@@ -99,7 +99,13 @@ export default class days extends Component{
         let timeFirstStart = new Date(0,0,0, timeFromHours, timeFromMinute);
         let timeFirstEnd = new Date(0,0,0, timeToHours, timeToMinute);
         let counter = 0;
-        if(this.state.tasks[key]){
+        if(timeFrom ==='' || timeTo ===''){
+            this.setState({
+                errors : 'Please fill time for task'
+            });
+            counter++;
+        }
+        if(this.state.tasks[key] && counter === 0){
             if(timeFirstEnd <= timeFirstStart){
                 this.setState({
                     errors : 'Time To must be bigger than Time From'
@@ -146,7 +152,7 @@ export default class days extends Component{
             this.setState({
                 errors : 'Time From must be bigger than Time To'
             });
-        }else{
+        }else if(counter === 0) {
             let tasks = this.state.tasks;
             tasks[key] = [{
                 timeFrom : timeFrom,

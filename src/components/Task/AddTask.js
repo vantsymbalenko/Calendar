@@ -7,7 +7,7 @@ export default class AddTask extends Component{
         this.wrapperAdd = this.wrapperAdd.bind(this);
     }
     wrapperAdd(e){
-        e.preventDefault();
+
         this.props.add(this.timeFrom.value, this.timeTo.value, this.message.value);
     }
     render(){
@@ -19,7 +19,7 @@ export default class AddTask extends Component{
                            <span>From:</span>
                            <input
                                type="time"
-                               required
+                               required = {true}
                                ref = {(input) => { this.timeFrom = input;}}/>
                        </label>
                        <label className="wrapper-input-time">
@@ -43,7 +43,7 @@ export default class AddTask extends Component{
                            onClick = { this.props.cancel }
                        />
                        <input
-                           type="submit"
+                           type="button"
                            value="Add"
                            className="event-button"
                            onClick = { this.wrapperAdd }
