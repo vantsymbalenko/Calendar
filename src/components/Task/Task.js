@@ -5,6 +5,7 @@ export default class Task extends Component{
     constructor(props){
         super(props);
         this.wrapperDelete = this.wrapperDelete.bind(this);
+        this.wrapperEdit = this.wrapperEdit.bind(this);
     }
     wrapperEdit(e){
         e.preventDefault();

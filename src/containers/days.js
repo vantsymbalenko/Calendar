@@ -20,6 +20,9 @@ export default class days extends Component{
             dayOfTheMonth : new Date().getDate(),
             select : new Date().getDate(),
             add : false,
+            editedMessage : '',
+            editedTimeFrom : '',
+            editedTimeTo : '',
             errors : '',
             tasks : {
                 "20171023" : [
@@ -34,9 +37,9 @@ export default class days extends Component{
                         message : 'message for second task'
                     }
                 ],
-                "2017113" : [
+                "20171110" : [
                     {
-                        timeFrom : '17:00',
+                        timeFrom : '17:30',
                         timeTo : '18:00',
                         message : 'message for first task'
                     }
@@ -50,6 +53,20 @@ export default class days extends Component{
         this.add = this.add.bind(this);
         this.cancel = this.cancel.bind(this);
         this.remove = this.remove.bind(this);
+        this.edit = this.edit.bind(this);
+    }
+    edit(index){
+        let tasks = this.state.tasks;
+        let key = this.state.year + '' + this.state.month + '' + this.state.select;
+        let editedElement = tasks[key].splice(index,1);
+        console.log(editedElement);
+        this.setState({
+            editedMessage : editedElement[0].message,
+            editedTimeFrom : editedElement[0].timeFrom,
+            editedTimeTo : editedElement[0].timeTo,
+            tasks : tasks,
+            add : true
+        });
     }
     showPrevMonth(){
         if(this.state.month === 0){
@@ -142,6 +159,9 @@ export default class days extends Component{
                     });
                     this.setState({
                         tasks : tasks,
+                        editedMessage : '',
+                        editedTimeFrom : '',
+                        editedTimeTo : '',
                         add : false,
                         errors : ''
                     });
@@ -170,10 +190,29 @@ export default class days extends Component{
     }
     cancel(e){
         e.preventDefault();
-        this.setState({
-            add : false,
-            errors : ''
-        });
+        if(this.state.editedTimeFrom){
+            let key = this.state.year + '' + this.state.month + '' + this.state.select;
+            let tasks = this.state.tasks;
+            tasks[key].push({
+                timeFrom : this.state.editedTimeFrom,
+                timeTo : this.state.editedTimeTo,
+                message : this.state.editedMessage
+            });
+            this.setState({
+                add : false,
+                tasks : tasks,
+                editedTimeFrom : '',
+                editedTimeTo : '',
+                editedMessage : '',
+                errors : ''
+            });
+        }else{
+            this.setState({
+                add : false,
+                errors : ''
+            });
+        }
+
     }
     remove(index){
         let key = this.state.year + '' + this.state.month + '' + this.state.select;
@@ -185,6 +224,7 @@ export default class days extends Component{
             tasks : tasks
         });
     }
+
     render(){
         // let monthNames = ["January", "February", "March", "April", "May", "June",
         //     "July", "August", "September", "October", "November", "December"
@@ -259,9 +299,13 @@ export default class days extends Component{
                                add = { this.add }
                                cancel = {this.cancel }
                                errors = {this.state.errors}
+                               message = { this.state.editedMessage}
+                               timeFrom = { this.state.editedTimeFrom }
+                               timeTo = {this.state.editedTimeTo}
                            />
                          : <Tasks tasks={this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]}
                                   remove = {this.remove}
+                                  edit = { this.edit }
                          />
                      }
                  </div>

@@ -5,12 +5,19 @@ export default class AddTask extends Component{
     constructor(props){
         super(props);
         this.wrapperAdd = this.wrapperAdd.bind(this);
+        this.wrapperCancel = this.wrapperCancel.bind(this);
     }
     wrapperAdd(e){
-
         this.props.add(this.timeFrom.value, this.timeTo.value, this.message.value);
     }
+    wrapperCancel(e){
+        this.props.cancel(this.timeFrom.value, this.timeTo.value, this.message.value);
+    }
     render(){
+        console.log(this.props.timeFrom);
+        console.log(this.props.timeTo);
+        console.log(this.props.message);
+
         return(
 
                <div className="task-time">
@@ -18,6 +25,7 @@ export default class AddTask extends Component{
                        <label className="wrapper-input-time">
                            <span>From:</span>
                            <input
+                               defaultValue = { this.props.timeFrom}
                                type="time"
                                required = {true}
                                ref = {(input) => { this.timeFrom = input;}}/>
@@ -25,6 +33,7 @@ export default class AddTask extends Component{
                        <label className="wrapper-input-time">
                            <span>To:</span>
                            <input
+                               defaultValue = { this.props.timeTo}
                                type="time"
                                required
                                ref = {(input) => { this.timeTo = input;}}/>
@@ -32,9 +41,10 @@ export default class AddTask extends Component{
                        <label>
                            <span>Task message:</span>
                            <textarea
+                               defaultValue={this.props.message}
                                name="task" id=""
                                ref = {(input) => { this.message = input;}}
-                           ></textarea>
+                           />
                        </label>
                        <input
                            type="button"
@@ -44,7 +54,7 @@ export default class AddTask extends Component{
                        />
                        <input
                            type="button"
-                           value="Add"
+                           value={this.props.timeFrom ? "Edit" : "Add"}
                            className="event-button"
                            onClick = { this.wrapperAdd }
                        />

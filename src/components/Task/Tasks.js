@@ -25,7 +25,11 @@ export default class Tasks extends Component{
                 {/*</div>*/}
                 {this.props.tasks && this.props.tasks.length !==0  ? this.props.tasks.map((value, i) => {
                     return(
-                        <Task elem = {value} key = {i} index = {i} remove ={ this.props.remove} />
+                        <Task elem = {value}
+                              key = {i}
+                              index = {i}
+                              remove ={ this.props.remove}
+                              edit = { this.props.edit} />
                     )
                 }) : <EmptyTasksBoard/>}
             </div>
