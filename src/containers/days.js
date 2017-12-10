@@ -34,7 +34,7 @@ export default class days extends Component{
                         message : 'message for second task'
                     }
                 ],
-                "2017113" : [
+                "20171110" : [
                     {
                         timeFrom : '17:00',
                         timeTo : '18:00',
