@@ -2,18 +2,13 @@
     width:100%;
     text-align: center;
     margin-top: 20px;
-    /*border:1px solid violet;*/
-
 }
 .week-day{
-    /*border:1px solid violet;*/
-    /*color:rgb(131, 120, 226);*/
     width:14%;
     color:rgb(72, 61, 139);
     text-align: center;
     font-family: 'Raleway', sans-serif;
     font-weight:600;
     display: inline-block;
-    /*margin:0 4%;*/
     font-size:0.8em;
 }

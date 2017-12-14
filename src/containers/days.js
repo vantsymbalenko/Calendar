@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import Calendar from "../components/Calendar";
-// import Tasks from '../components/Tasks';
 import HeaderCalendar from '../components/Calendar/HeaderCalendar';
 import MonthDays from '../components/Calendar/MonthDays';
 import WeekDays from '../components/Calendar/WeekDays';
@@ -55,6 +53,7 @@ export default class days extends Component{
         this.remove = this.remove.bind(this);
         this.edit = this.edit.bind(this);
     }
+
     edit(index){
         let tasks = this.state.tasks;
         let key = this.state.year + '' + this.state.month + '' + this.state.select;
@@ -68,6 +67,7 @@ export default class days extends Component{
             add : true
         });
     }
+
     showPrevMonth(){
         if(this.state.month === 0){
             this.setState({
@@ -81,6 +81,7 @@ export default class days extends Component{
         }
 
     }
+
     showNextMonth(){
         if(this.state.month === 11){
             this.setState({
@@ -93,6 +94,7 @@ export default class days extends Component{
             });
         }
     }
+
     selectedDate(e){
         if(e.target.className !== "prev-month-day"){
             this.setState({
@@ -100,6 +102,7 @@ export default class days extends Component{
             });
         }
     }
+
     addTask(e){
         e.preventDefault();
         this.setState({
@@ -107,6 +110,7 @@ export default class days extends Component{
         });
 
     }
+
     add(timeFrom, timeTo, message){
         let key = this.state.year + '' + this.state.month + '' + this.state.select;
         let timeFromHours = +timeFrom.split(":")[0],
@@ -146,7 +150,6 @@ export default class days extends Component{
                             errors : 'You already have task in this time'
                         });
                         console.log(counter);
-                        // break;
                     }
                 }
                 if(counter === 0  ){
@@ -185,9 +188,8 @@ export default class days extends Component{
                 errors : ''
             });
         }
-
-
     }
+
     cancel(e){
         e.preventDefault();
         if(this.state.editedTimeFrom){
@@ -212,8 +214,8 @@ export default class days extends Component{
                 errors : ''
             });
         }
-
     }
+
     remove(index){
         let key = this.state.year + '' + this.state.month + '' + this.state.select;
         let tasks = this.state.tasks;
@@ -226,18 +228,10 @@ export default class days extends Component{
     }
 
     render(){
-        // let monthNames = ["January", "February", "March", "April", "May", "June",
-        //     "July", "August", "September", "October", "November", "December"
-        // ];
-        // console.log(this.state);
-        let nameWeekDays = [ "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
         let fullNameWeekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         let monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
-        // let days = new Date( this.state.year, this.state.month, 0).getDate();
-        // console.log(this.state);
-        // console.log(this.state.task);
         let numberOfDays = new Date(this.state.year, this.state.month+1, 0).getDate();
         let firstDayInWeek = new Date(this.state.year, this.state.month, 1).getDay();
         let numberOfDaysPrevMonth = new Date(this.state.year, this.state.month, 0).getDate();
@@ -250,7 +244,6 @@ export default class days extends Component{
         for(let i=1; i<=numberOfDays;i++){
             days.push(i);
         }
-        // console.log(this.state.tasks[this.state.year + '' + this.state.month + '' + this.state.select]);
      return(
              <div className="container">
                  <div className="calendar">
@@ -261,7 +254,7 @@ export default class days extends Component{
                          month = { this.state.month }
                          year = { this.state.year }
                      />
-                     <WeekDays weekDays = { nameWeekDays } />
+                     <WeekDays weekDays = { fullNameWeekDays } />
                      <MonthDays
                          days = { days }
                          select = { this.state.select }
@@ -273,20 +266,8 @@ export default class days extends Component{
                      />
                      <button className="add-task" onClick={ this.addTask }><i>&#43;</i></button>
                  </div>
-                 {/*<Calendar*/}
-                     {/*showPrevMonth = { this.showPrevMonth }*/}
-                     {/*showNextMonth = { this.showNextMonth }*/}
-                     {/*year = { this.state.year }*/}
-                     {/*monthNames = { monthNames }*/}
-                     {/*month = { this.state.month }*/}
-                     {/*weekDays = { WeekDays }*/}
-                     {/*days = { days }*/}
-                     {/*select = { this.state.select }*/}
-                     {/*firstDayInWeek = { firstDayInWeek }*/}
-                     {/*selectedDate = { this.selectedDate }*/}
-                 {/*/>*/}
                  <div className="today-tasks">
-                     <div className="today-tasks-layer"></div>
+                     <div className="today-tasks-layer"/>
                      <SelectedDate
                          select = { this.state.select }
                          monthNames = { monthNames }
@@ -309,7 +290,6 @@ export default class days extends Component{
                          />
                      }
                  </div>
-                {/*<Tasks/>*/}
              </div>
         );
     }

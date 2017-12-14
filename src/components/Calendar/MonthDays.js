@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../css/Calendar/month-day.css';
+
 export default class MonthDays extends Component{
     render(){
         console.log(this.props.firstDayInWeek);
