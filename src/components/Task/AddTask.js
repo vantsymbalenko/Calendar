@@ -14,10 +14,6 @@ export default class AddTask extends Component{
         this.props.cancel(this.timeFrom.value, this.timeTo.value, this.message.value);
     }
     render(){
-        console.log(this.props.timeFrom);
-        console.log(this.props.timeTo);
-        console.log(this.props.message);
-
         return(
 
                <div className="task-time">

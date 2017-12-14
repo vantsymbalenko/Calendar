@@ -1,13 +1,12 @@
-export default function days(state = {  } ,  action ) {
+export default function days(state = {   dayOfTheMonth : new Date().getDate(),
+    select : new Date().getDate()} ,  action ) {
     switch (action.type){
-        case 'SET_DAYS' :
+        case 'SET_SELECT_DAY' :
             return {
                 ...state,
-                days : action.days
+                select : action.select
             };
         default :
-            return{
-                type: 'SET_ERROR'
-            };
+            return state;
     }
 }

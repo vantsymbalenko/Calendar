@@ -1,6 +1,6 @@
-export default function ( year = new Date ().getFullYear(), month = new Date().getMonth()){
+export default function ( select = new Date().getDate()){
     return{
-        type : 'SET_DAYS',
-        days : new Date(year, month, 0).getDate()
+        type : 'SET_SELECT_DAY',
+        select : select
     }
 }

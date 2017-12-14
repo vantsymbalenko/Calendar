@@ -3,7 +3,6 @@
 }
 .mark, .message {
     display: inline-block;
-    /*border:1px solid black;*/
 }
 .message{
     font-size:1.5rem;

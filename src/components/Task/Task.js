@@ -16,10 +16,9 @@ export default class Task extends Component{
         this.props.remove(this.props.index);
     }
     render(){
-        console.log(this.props.remove);
         return(
             <div className="task">
-                <div className="mark"></div>
+                <div className="mark"/>
                 <div className="task-wrapper">
                     <div className="time">{this.props.elem.timeFrom + '-' +this.props.elem.timeTo }</div>
 

@@ -1,13 +1,11 @@
 export default function Year(state = { year : new Date().getFullYear() } ,  action ) {
-    switch (action.type){
-        case 'SET_MONTH' :
+    switch (action.type) {
+        case 'SET_YEAR' :
             return {
                 ...state,
-                month : action.month
+                year: action.year
             };
         default :
-            return{
-               state
-            };
+            return state;
     }
 }

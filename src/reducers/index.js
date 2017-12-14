@@ -1,32 +1,16 @@
+import { combineReducers } from 'redux';
+import year from './year';
+import month from './month';
+import days from './days';
+import edit from './edit';
+import errors from './errors';
+import add from './add';
 
-export default function genDays(state = { }, action ) {
-    let date = new Date(),
-        year = date.getFullYear(),
-        month = date.getMonth(),
-        days = new Date(year, month+1, 0).getDate(),
-        genState = {
-          year : year,
-          month : month,
-          days : days
-        };
-        case 'SET_YEAR' :
-            return {
-                ...state,
-                year : action.year
-            };
-        case 'SET_MONTH' :
-            return {
-                ...state,
-                month : action.month
-            };
-        case 'SET_DAYS' :
-            return {
-                ...state,
-                days : action.days
-            };
-        default :
-            return{
-                genState
-            };
-    }
-}
+export default combineReducers({
+    year,
+    month,
+    days,
+    edit,
+    errors,
+    add
+});

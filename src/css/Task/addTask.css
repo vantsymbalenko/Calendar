@@ -1,32 +1,19 @@
-/*.add-task-comp{*/
-    /*position: relative;*/
-    /*!*border:1px solid black;*!*/
-    /*margin-top: 150px;*/
-/*}*/
-/*.add-task-comp span{*/
-    /*display: block;*/
-    /*color:white;*/
-    /*font-size:1.5rem;*/
-/*}*/
 .task-time{
     color:white;
     position: relative;
     font-size:1.5rem;
     width:80%;
-    /*border:1px solid black;*/
     margin:150px auto;
 }
 .wrapper-input-time {
     margin-bottom: 10px;
     display: inline-block;
     width:50%;
-    /*border: 1px solid black;*/
 }
 .wrapper-input-time span{
     margin-left: 10%;
 }
 .wrapper-input-time input{
-
     width:80%;
     text-align: center;
     height:20px;

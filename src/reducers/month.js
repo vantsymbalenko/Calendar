@@ -1,13 +1,11 @@
-export default function Month(state = { month : new Date().getMonth() } ,  action ) {
+export default function Month(state = { month : new Date().getMonth(), todayMonth : new Date().getMonth() } ,  action ) {
     switch (action.type){
-        case 'SET_YEAR' :
+        case 'SET_MONTH' :
             return {
                 ...state,
-                year : action.year
+                month : action.month
             };
         default :
-            return{
-               state
-            };
+            return state;
     }
 }
